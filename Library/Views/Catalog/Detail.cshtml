@@ -1,0 +1,114 @@
+﻿@model Library.Models.Catalog.AssetDetailModel
+
+<div class="container">
+    <div class="page-header clearfix detailHeading">
+        <h2 class="text-muted">Detalles del item</h2>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img class="detailImage" src="@Model.ImageUrl" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p id="itemTitle">@Model.Title</p>
+            <p id="itemAuthor">@Model.AuthorOrDirector</p>
+            <p id="itemStatus">@Model.Status</p>
+            <p id="itemType">@Model.Type</p>
+            <p id="itemCurrentLocation">@Model.CurrentLocation</p>
+
+            @if (Model.Status == "Lost")
+            {
+                <p>Este item se ha perdido. No puede ser retirado.</p>
+                <p> <a class="btn btn-lg btn-danger" role="button" asp-controller="Catalog" asp-action="MarkFound" asp-route-id="@Model.Id">Encontraod </a> </p>
+
+            }
+
+            @if (Model.Status == "Checked Out")
+            {
+                <p id="itemPatron">Retirado por: @Model.PatronName</p>
+                <p> <a class="btn btn-lg btn-success" role="button" asp-controller="Catalog" asp-action="CheckIn" asp-route-id="@Model.Id">Devolver</a> </p>
+                <p> <a class="btn btn-lg btn-warning" role="button" asp-controller="Catalog" asp-action="Hold" asp-route-id="@Model.Id">Reservar </a> </p>
+            }
+
+            @if (Model.Status == "Available")
+            {
+
+                <p> <a class="btn btn-lg btn-info" role="button" asp-controller="Catalog" asp-action="Checkout" asp-route-id="@Model.Id">Retirar </a> </p>
+
+            }
+
+        </div>
+
+        <div class="col-md-4 detailInfo">
+            <table>
+                <tr>
+                    <td class="itemLabel">ISBN: </td>
+                    <td class="itemValue">@Model.Isbn</td>
+                </tr>
+                <tr>
+                    <td class="itemLabel">Nro. Dewey: </td>
+                    <td class="itemValue">@Model.DeweyCallNumber</td>
+                </tr>
+                <tr>
+                    <td class="itemLabel">Precio: </td>
+                    <td class="itemValue">@Model.Cost</td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Historial de retiros</h4>
+        <table class="table table-bordered table-hover table condensed">
+            <thead>
+                <tr>
+                    <th>Fecha Préstamo</th>
+                    <th>Fecha Devolución</th>
+                    <th>Nro. Tarjeta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var checkout in Model.CheckoutHistory)
+                {
+                    <tr>
+                        <td>@checkout.CheckedOut</td>
+                        <td>@checkout.CheckedIn</td>
+                        <td>@checkout.LibraryCard.Id</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <h4>Reservas actuales</h4>
+        <table class="table table-bordered table-hover table condensed">
+            <thead>
+                <tr>
+                    <th>Fecha Reserva</th>
+                    <th>Miembro</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hold in Model.Holds)
+                {
+                    <tr>
+                        <td>@hold.HoldPlaced</td>
+                        <td>@hold.PatronName</td>
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+<h3>@ViewData["Title"]</h3>
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="demo-card-square mdl-shadow--2dp mdl-card">
+            <div id="catalog" class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text homeLabel">Catálogo</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Ver y administrar artículos de la biblioteca
+            </div>
+            <div class="mdl-card__actions mdl-card--border"><a class="mdl-button mdl-button--colored" asp-controller="Catalog" asp-action="Index">Ver Catálogo</a></div>
+        </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="demo-card-square mdl-shadow--2dp mdl-card">
+            <div id="patrons" class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text homeLabel">Miembros</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Ver y administrar datos de miembros de la biblioteca
+            </div>
+            <div class="mdl-card__actions mdl-card--border"><a class="mdl-button mdl-button--colored" asp-controller="Patron" asp-action="Index">Ver Miembros</a></div>
+        </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="demo-card-square mdl-shadow--2dp mdl-card">
+            <div id="branches" class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text homeLabel">Sucursales</h2>
+            </div>
+            <div class="mdl-card__supporting-text">
+                Ver y administrar las sucursales de la biblioteca.
+            </div>
+            <div class="mdl-card__actions mdl-card--border"><a class="mdl-button mdl-button--colored" asp-controller="Branch" asp-action="Index">Ver Sucursales</a></div>
+        </div>
+    </div>
+</div>

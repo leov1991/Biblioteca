@@ -1,0 +1,37 @@
+﻿@model Library.Models.Checkouts.CheckoutModel
+
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2>Reservar Item</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <p id="itemTitle">@Model.Title</p>
+                    <img src="@Model.ImageUrl" alt="@Model.Title" class="detailImage" />
+                </div>
+            </div>
+            <div class="col-md-9">
+                <p>Actualmente hay @Model.HoldCount reservas para este item.</p>
+                @**HTML helper. Creates an object that implements IDsiposable *@
+                @using (Html.BeginForm("PlaceHold", "Catalog", FormMethod.Post))
+                {
+                    @Html.HiddenFor(a => a.AssetId)
+                    <div>
+                        Ingrese número de tarjeta
+                        @Html.TextBoxFor(a => a.LibraryCardId)
+                        @**Write a textbox and set attributes according to model*@
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-info btn-lg">Reservar</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+

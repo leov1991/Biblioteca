@@ -1,0 +1,57 @@
+﻿@model Library.Models.Branches.BranchDetailModel
+@{
+    ViewBag.Title = "Sucursal " + Model.Name;
+}
+
+<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Informcación de la sucursal</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <img src="@Model.ImageUrl" alt="@Model.Name" />
+        </div>
+        <div class="row branchInfo">
+            <div class="col-md-8">
+                <h2>@Model.Name</h2>
+                <div class="branchContact">
+                    <div id="branchAddress">Dirección: @Model.Address</div>
+                    <div id="branchTel">Teléfono: @Model.Telephone</div>
+                </div>
+                <div id="branchDescription">
+                    <p class="caption">@Model.Description</p>
+                </div>
+                <div id="branchHours">
+                    <ul>
+                        @foreach (var day in Model.HoursOpen)
+                        {
+                            <li>@day</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td class="itemLabel">Fecha apertura:</td>
+                        <td class="itemValue">@Model.OpenDate</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Miembros:</td>
+                        <td class="itemValue">@Model.NumberOfPatrons</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Items:</td>
+                        <td class="itemValue">@Model.NumberOfAssets</td>
+                    </tr>
+                    <tr>
+                        <td class="itemLabel">Valor total de los items:</td>
+                        <td class="itemValue">@Model.AssetsValue</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
